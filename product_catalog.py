@@ -41,7 +41,7 @@ def parse_catalog(filename):
     p = pyRXPU.Parser()
     tree = p.parse(xml)
     tagTree = TagWrapper(tree)
-    request_a_quote = [109,110,4121,4122,4123]
+    request_a_quote = [109, 110, 4121, 4122, 4123]
     # we now need to de-duplicate; the query returns multiple rows with different images
     # in them.  if id is same, assume it's the same product.
     ids_seen = set()
