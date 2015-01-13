@@ -11,7 +11,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 pdfmetrics.registerFont(TTFont('hei', 'rml/fonts/simfang.ttf'))
 from reportlab.pdfgen import canvas
 from reportlab.lib import colors, fonts
-from reportlab.lib.pagesizes import letter, inch
+from reportlab.lib.pagesizes import A4, inch
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle,Image
 
 
@@ -37,16 +37,27 @@ for li in output_list:
     car.zpzmx = li[10]
     car.zclsbn = li[2]
     car.zys = li[11]
-    car.zdjlx = "直流他励驱动电机"
+    car.zdjlx = li[15]
     car.zdjn = li[7]
     car.zkzqn = li[3]
     car.dclx  = "动力免维护胶体电池"
     car.zjgl = li[16]
-    car.wkcc = "3320*1540*1480"
+    if car.zpzmx in ['D50 乐享2014版','D50 众享2014版','D50 福享2014版','D50 劲享2014版','D50 尊享2014版','D50 乐享2015版','D50 众享2015版','D50 福享2015版']:
+        car.wkcc = "3320*1540*1480"
+        car.ltgg = "145/70R12"
+        car.lj = "1360"
+        car.zj = "2260"
+    elif car.zpzmx in ['D60 乐享2014版','D60 尊享2014版']:
+        car.wkcc = "3994*1618*1500"
+        car.ltgg = "165/65R14"
+        car.lj = "1420"
+        car.zj = "2400"
+    elif car.zpzmx in ['D70 乐享2015版','D70 福享2015版','D70 尊享2015版']:
+        car.wkcc = "3356*1540*1480"
+        car.ltgg = "145/70R12"
+        car.lj = "1360"
+        car.zj = "2260"
     car.lts = "4"
-    car.ltgg = "145/70R12"
-    car.lj = "1360"
-    car.zj = "2260"
     car.zh = li[25]
     car.zzl = li[26]
     car.zzbzl = li[24]
@@ -70,7 +81,7 @@ for li in output_list:
     img = qr.make_image()
     img.save("rml/img/"+car.zclsbn+".jpg")
 
-    doc = SimpleDocTemplate('output/'+car.zclsbn+".pdf", pagesize=letter)
+    doc = SimpleDocTemplate('output/'+car.zclsbn+".pdf", pagesize=A4)
     # container for the 'Flowable' objects
     elements = []
 
@@ -84,15 +95,15 @@ for li in output_list:
        ['5.车辆型号',car.zpzmx , '6.车辆识别代码/车架号',car.zclsbn ],
        ['7.车身颜色', car.zys, '', ''],
        ['8.底盘型号/底盘ID', '--', '', '--'],
-       ['9.底盘合格证编号', '--', '10.驱动电机型号', '直流串励驱动电机'],
+       ['9.底盘合格证编号', '--', '10.驱动电机型号', car.zdjlx],
        ['11.电机编号', car.zdjn, '12.控制器号', car.zkzqn],
        ['13.电池类型', '动力免维护胶体电池', '14.功率（KW）',car.zjgl ],
        ['15.排放标准', '零排放', '--', '--'],
        ['16.百公里耗电(kwh)', '--', '--', '--'],
        ['17.外廓尺寸', car.wkcc, '18.货箱内部尺寸(mm)', '--'],
        ['19.轮胎数', '4', '20.轮胎规格', car.ltgg],
-       ['21.轮距(前/后)(mm)', '1360', '1360', '--'],
-       ['22.轴距', '2260', '', ''],
+       ['21.轮距(前/后)(mm)', car.lj, car.lj, '--'],
+       ['22.轴距', car.zj, '', ''],
        ['23.轴荷(kg)', car.zh, '', ''],
        ['24.轴数', '2', '25.转向形式', '方向盘'],
        ['26.总质量(kg)', car.zzl, '27.整备质量(kg)', car.zzbzl ],
