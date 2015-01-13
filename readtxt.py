@@ -76,7 +76,7 @@ for li in output_list:
                +'电机编号:'+car.zdjn+'\n'
                +'控制器号:'+car.zkzqn+'\n'
                +'功率:'+car.zjgl+'\n'
-               +'整备质量:'+car.zzbzl)
+               +'发证日期:'+car.zhgrq)
     qr.make(fit=True)
     img = qr.make_image()
     img.save("rml/img/"+car.zclsbn+".jpg")
@@ -146,3 +146,4 @@ for li in output_list:
 
 
 print("ALL Finished!")
+input()
