@@ -13,7 +13,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib import colors, fonts
 from reportlab.lib.pagesizes import letter, inch
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle,Image
-from time import time
+
 
 fonts.addMapping('hei', 0, 0, 'hei')
 fonts.addMapping('hei', 0, 1, 'hei')
@@ -25,7 +25,7 @@ class Car(object):
     pass
 car = Car()
 
-t0 = time()
+
 with open("data/11.txt") as input_data:
     input_list = [num.split('|') for num in input_data.readlines()]
 output_list = input_list[6:-1]
@@ -132,7 +132,6 @@ for li in output_list:
     # write the document to disk
     doc.build(elements)
     print car.zclsbn + " Finished"
-t1 = time()
-print('runtime %f'%(t1-t0))
+
+
 print("ALL Finished!")
-input()
