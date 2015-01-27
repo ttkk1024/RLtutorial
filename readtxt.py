@@ -1,4 +1,4 @@
-#coding:utf-8
+﻿#coding:utf-8
 __author__ = 'SharpShell'
 
 import qrcode
@@ -79,15 +79,15 @@ for li in output_list:
                +'发证日期:'+car.zhgrq)
     qr.make(fit=True)
     img = qr.make_image()
-    img.save("rml/img/"+car.zclsbn+".jpg")
+    img.save("rml/img/"+car.zhgzn+".jpg")
 
-    doc = SimpleDocTemplate('output/'+car.zclsbn+".pdf", pagesize=A4)
+    doc = SimpleDocTemplate('output/'+car.zhgzn[-6:]+car.zhgzn[0:-6]+".pdf", pagesize=A4)
     # container for the 'Flowable' objects
     elements = []
 
-    I = Image('rml/img/'+car.zclsbn+'.jpg')
-    I.drawHeight = 1.4*inch*I.drawHeight / I.drawWidth
-    I.drawWidth = 1.4*inch
+    I = Image('rml/img/'+car.zhgzn+'.jpg')
+    I.drawHeight = 1.6*inch*I.drawHeight / I.drawWidth
+    I.drawWidth = 1.6*inch
 
     data = [['1.合格证编号',car.zhgzn , '2.发证日期',car.zhgrq ],
        ['3.车辆制造企业名称', car.ename, '', ''],
@@ -118,7 +118,7 @@ for li in output_list:
        ['车辆生成单位名称:山东梅拉德能源动力科技有限公司', '', '', ''],
        ['生产单位地址:山东省潍坊市昌乐县比德文千亩产业园', '', '', '']]
 
-    t = Table( data, 1.8 * inch, 0.3 * inch)
+    t = Table( data, 1.8 * inch, 0.34 * inch)
     t.setStyle(TableStyle([#('ALIGN',(1,1),(-1,-1),'RIGHT'),
                            #('TEXTCOLOR',(1,1),(-1,-1),colors.red),
                           # ('VALIGN',(0,0),(0,-1),'TOP'),
@@ -129,6 +129,7 @@ for li in output_list:
                            ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
                            ('BOX', (0,0), (-1,-1), 0.25, colors.black),
                            ('FONT', (0,0), (-1,-1), 'hei'),
+                           ('FONTSIZE', (0,0), (-1,-1), 11),
                            ('SPAN',(1,1),(3,1)),
                            ('SPAN',(1,5),(2,5)),
                            ('SPAN',(1,14),(3,14)),
@@ -142,7 +143,7 @@ for li in output_list:
     elements.append(t)
     # write the document to disk
     doc.build(elements)
-    print car.zclsbn + " Finished"
+    print car.zhgzn + " Finished"
 
 
 print("ALL Finished!")
